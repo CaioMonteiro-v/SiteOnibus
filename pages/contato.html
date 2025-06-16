@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contato e Suporte</title>
+  <link rel="stylesheet" href="../css/css.css" />
+  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="../css/contato.css" />
+
+</head>
+<body>
+  <div class="contato-container">
+    <h1>Fale Conosco</h1>
+    <form id="formContato">
+      <input type="text" id="nome" placeholder="Seu nome" required />
+      <input type="email" id="email" placeholder="Seu e-mail" required />
+      <textarea id="mensagem" rows="5" placeholder="Digite sua mensagem" required></textarea>
+      <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+    </form>
+  </div>
+
+  <!-- Chat Fictício -->
+  <button class="chat-toggle" title="Chat de Suporte">&#128172;</button>
+  <div class="chat-widget" id="chat">
+    <div class="chat-header">Atendente Virtual</div>
+    <div class="chat-messages" id="chatMessages">
+      <div><strong>Atendente:</strong> Olá! Como posso te ajudar?</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Digite aqui..." />
+      <button id="btnChatEnviar">Enviar</button>
+    </div>
+  </div>
+
+  <script>
+    // Formulário de Contato
+    document.getElementById('formContato').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
+      this.reset();
+    });
+
+    // Chat fictício
+    const chat = document.getElementById('chat');
+    const chatToggle = document.querySelector('.chat-toggle');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    chatToggle.addEventListener('click', () => {
+      chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    document.getElementById('btnChatEnviar').addEventListener('click', () => {
+      const msg = chatInput.value.trim();
+      if (msg !== '') {
+        const userMsg = document.createElement('div');
+        userMsg.innerHTML = `<strong>Você:</strong> ${msg}`;
+        chatMessages.appendChild(userMsg);
+
+        // Simular resposta automática
+        setTimeout(() => {
+          const autoReply = document.createElement('div');
+          autoReply.innerHTML = `<strong>Atendente:</strong> Estamos verificando...`;
+          chatMessages.appendChild(autoReply);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+
+        chatInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>

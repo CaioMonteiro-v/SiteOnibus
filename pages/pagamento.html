@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento</title>
+  <link rel="stylesheet" href="../css/css.css">
+  <link real="stylesheet" href="../css/pagamentos.css">
+  
+</head>
+<!-- Melhore a estrutura do HTML e adicione esta estilização no <head> ou no seu CSS -->
+<style>
+.container {
+  max-width: 600px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 32px 36px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.resumo p {
+  margin: 8px 0;
+  font-size: 1.08em;
+}
+.pagamento-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pagamento-form label {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.pagamento-form input, .pagamento-form select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  font-size: 1em;
+  margin-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.pagamento-form .linha-campos {
+  display: flex;
+  gap: 12px;
+}
+.pagamento-form .linha-campos input,
+.pagamento-form .linha-campos select {
+  flex: 1;
+  margin-bottom: 0;
+}
+.btn-confirmar {
+  background: #2980b9;
+  color: #fff;
+  border: none;
+  padding: 12px 0;
+  border-radius: 6px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+.btn-confirmar:hover {
+  background: #1a5a8a;
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 16px 8px;
+  }
+  .pagamento-form .linha-campos {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+</style>
+
+<div class="container">
+  <h2>Confirmação de Pagamento</h2>
+  <div class="resumo" id="resumo">
+    <p><b>Origem:</b> Sinop</p>
+    <p><b>Destino:</b> Alta Floresta</p>
+    <p><b>Data:</b> 09/08/2025 - 08:30</p>
+    <p><b>Empresa:</b> Expresso MT</p>
+    <p><b>Assento:</b> 18</p>
+    <p><b>Valor:</b> R$ 141,00</p>
+  </div>
+  <form class="pagamento-form">
+    <label for="formaPagamento">Forma de Pagamento:</label>
+    <select id="formaPagamento">
+      <option value="credito">Cartão de Crédito</option>
+      <option value="debito">Cartão de Débito</option>
+      <option value="pix">PIX</option>
+    </select>
+    <div class="linha-campos">
+      <input type="text" placeholder="Número do Cartão" maxlength="19" />
+      <input type="text" placeholder="Nome no Cartão" />
+    </div>
+    <div class="linha-campos">
+      <input type="month" placeholder="Validade" />
+      <input type="text" placeholder="CVV" maxlength="4" />
+    </div>
+    <button type="submit" class="btn-confirmar">Confirmar Pagamento</button>
+  </form>
+  <!-- Adicione este bloco ao seu HTML, dentro da .pagamento-form -->
+<div id="pix-qrcode" style="display:none; text-align:center; margin-top:16px;">
+  <p>Escaneie o QR Code para pagar com PIX:</p>
+  <img src="https://api.qrserver.com/v1/create-qr-code/?data=pagamento@sistemamt.com.br&size=180x180" alt="QR Code PIX" style="margin:0 auto;"/>
+</div>
+  <script src="../js/pagamento.js"></script>
+</div>

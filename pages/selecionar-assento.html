@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecionar Assento</title>
+    <link rel="stylesheet" href="../css/css.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            padding: 30px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .assentos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .assento {
+            width: 100%;
+            padding: 15px 0;
+            background-color: #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .assento:hover {
+            background-color: #ccc;
+        }
+        .assento.selecionado {
+            background-color: #2ecc71;
+            color: white;
+        }
+        .assento.ocupado {
+            background-color: #e74c3c;
+            color: white;
+            cursor: not-allowed;
+        }
+        .resumo {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Selecione seu assento</h2>
+        <div class="assentos" id="assentos">
+            <!-- Assentos gerados via JS -->
+        </div>
+        <div class="resumo">
+            <p id="info"></p>
+            <p>Assento Selecionado: <span id="selecionado">Nenhum</span></p>
+            <button id="confirmar">Continuar para Pagamento</button>
+        </div>
+    </div>
+
+    <script>
+        const totalAssentos = 20;
+        const assentosOcupados = [3, 7, 12]; // simulando alguns já ocupados
+        const assentosContainer = document.getElementById('assentos');
+        const selecionadoSpan = document.getElementById('selecionado');
+        const info = document.getElementById('info');
+
+        const passagem = JSON.parse(localStorage.getItem('passagem'));
+
+        if (passagem) {
+            info.innerHTML = `<strong>${passagem.origem}</strong> → <strong>${passagem.destino}</strong><br>Empresa: ${passagem.empresa} - ${passagem.data} ${passagem.horario}<br>Valor: R$ ${passagem.preco}`;
+        }
+
+        let assentoSelecionado = null;
+
+        for (let i = 1; i <= totalAssentos; i++) {
+            const div = document.createElement('div');
+            div.className = 'assento';
+            div.textContent = i;
+
+            if (assentosOcupados.includes(i)) {
+                div.classList.add('ocupado');
+            } else {
+                div.addEventListener('click', () => {
+                    document.querySelectorAll('.assento').forEach(a => a.classList.remove('selecionado'));
+                    div.classList.add('selecionado');
+                    assentoSelecionado = i;
+                    selecionadoSpan.textContent = i;
+                });
+            }
+
+            assentosContainer.appendChild(div);
+        }
+
+        document.getElementById('confirmar').addEventListener('click', () => {
+            if (!assentoSelecionado) {
+                alert("Selecione um assento antes de continuar.");
+                return;
+            }
+
+            // Salvar assento e seguir para pagamento
+            localStorage.setItem('assento', assentoSelecionado);
+            window.location.href = "pagamento.html";
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+/* css/pagamento.css – estilos para a página de pagamento */
+.container {
+    max-width: 700px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.resumo, .pagamento-form {
+    margin-bottom: 30px;
+}
+
+.resumo p {
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.pagamento-form label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.pagamento-form input,
+.pagamento-form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn-confirmar {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-confirmar:hover {
+    background-color: #219150;
+}
+
+.qr-code {
+    display: block;
+    margin: 20px auto;
+    max-width: 250px;
+}
